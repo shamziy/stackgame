@@ -1,0 +1,52 @@
+:root { --ink: #fff6e8; --ink-soft: #f0d9c4; --gold: #ffd36b; }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; touch-action: manipulation; }
+body {
+  background: linear-gradient(rgb(28, 27, 58) 0%, rgb(91, 58, 107) 55%, rgb(232, 148, 106) 100%);
+  color: var(--ink);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  user-select: none;
+}
+canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+#stars { opacity: 0; pointer-events: none; }
+#hud {
+  position: fixed; top: calc(env(safe-area-inset-top, 0px) + 14px); left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 0 16px; pointer-events: none;
+}
+#bestchip, #mute {
+  padding: 6px 12px; border-radius: 999px; border: 0; font: inherit; font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.14); color: var(--ink);
+}
+#mute { pointer-events: auto; cursor: pointer; }
+#bestchip.record { color: var(--gold); }
+#bestchip.bump { animation: bump 0.4s ease-out; }
+@keyframes bump { 0% { transform: scale(1); } 40% { transform: scale(1.18); } 100% { transform: scale(1); } }
+#score {
+  position: fixed; top: calc(env(safe-area-inset-top, 0px) + 10px); left: 0; right: 0;
+  text-align: center; font-size: 4rem; font-weight: 700; font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+#toast {
+  position: fixed; top: 24%; left: 0; right: 0; text-align: center;
+  font-size: 1.6rem; font-weight: 600; pointer-events: none; opacity: 0;
+}
+#toast.gold { color: var(--gold); }
+#toast.show { animation: pop 0.9s ease-out; }
+@keyframes pop {
+  0% { opacity: 0; transform: translateY(8px) scale(0.9); }
+  20% { opacity: 1; transform: none; }
+  100% { opacity: 0; transform: translateY(-14px); }
+}
+#overlay {
+  position: fixed; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom, 0px) + 12%);
+  text-align: center; padding: 0 24px; pointer-events: none;
+}
+#overlay.hidden { display: none; }
+#overlay h1 { margin: 0 0 8px; font-size: 2.2rem; }
+#overlay p { margin: 4px auto; max-width: 28ch; color: var(--ink-soft); line-height: 1.4; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  #toast.show { animation: none; opacity: 1; }
+  #bestchip.bump { animation: none; }
+}

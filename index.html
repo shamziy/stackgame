@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tower Stack 3D</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <canvas id="game"></canvas>
+  <div id="hud">
+    <div id="bestchip">Best <span id="best">0</span></div>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+  </div>
+  <div id="score" aria-live="polite">0</div>
+  <div id="toast" aria-live="polite"></div>
+  <div id="overlay">
+    <h1 id="title">Tower Stack</h1>
+    <p id="sub">Tap, click or press Space to drop each slab. Line it up.</p>
+    <p id="overlay-best"></p>
+  </div>
+
+  <!-- Classic scripts (no ES modules), so this works by double-clicking index.html, from a server, or on GitHub Pages -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="src/audio.js"></script>
+  <script src="src/scene.js"></script>
+  <script src="src/game.js"></script>
+  <script src="src/main.js"></script>
+</body>
+</html>
