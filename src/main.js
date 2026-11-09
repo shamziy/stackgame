@@ -107,45 +107,13 @@
 
   overlayBest.textContent = best ? 'Best: ' + best : '';
 
- // Start automatically on touch-enabled devices.
-const isTouchDevice =
-  window.matchMedia('(pointer: coarse)').matches ||
-  navigator.maxTouchPoints > 0;
+// Automatically start the game on phones and touchscreens.
+const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
 
 if (isTouchDevice) {
-  game.tap();
-  overlay.classList.add('hidden');
-}
-
-// Prevent one physical tap from being counted twice.
-let lastInputTime = 0;
-
-function input(e) {
-  const now = Date.now();
-
-  if (now - lastInputTime < 350) return;
-  lastInputTime = now;
-
-  if (e) e.preventDefault();
-
-  sound.init();
-
-  if (performance.now() < lockedUntil) return;
-
-  if (game.state === 'over') game.reset();
-
-  game.tap();
-
-  if (game.state === 'play') {
+    game.tap();
     overlay.classList.add('hidden');
-  }
 }
-
-// Listen directly on the game canvas.
-renderer.domElement.addEventListener('pointerdown', input);
-renderer.domElement.addEventListener('touchstart', input, {
-  passive: false
-});
   function input() {
     sound.init();
     if (performance.now() < lockedUntil) return;
