@@ -107,6 +107,14 @@
 
   overlayBest.textContent = best ? 'Best: ' + best : '';
 
+  // Automatically start the game on phones and touchscreens.
+const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+
+if (isTouchDevice) {
+    game.tap();
+    overlay.classList.add('hidden');
+}
+
   function input() {
     sound.init();
     if (performance.now() < lockedUntil) return;
